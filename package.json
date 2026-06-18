@@ -1,0 +1,15 @@
+{
+  "name": "infinisynapse-data-tool",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vercel dev",
+    "deploy": "vercel",
+    "deploy:prod": "vercel --prod",
+    "check": "node --check api/index.mjs && node scripts/check-html.mjs"
+  },
+  "devDependencies": {
+    "vercel": "latest"
+  }
+}
