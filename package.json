@@ -4,10 +4,11 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "local": "node server.mjs",
     "dev": "vercel dev",
     "deploy": "vercel",
     "deploy:prod": "vercel --prod",
-    "check": "node --check api/index.mjs && node scripts/check-html.mjs"
+    "check": "node --check api/index.js && node scripts/check-html.mjs"
   },
   "devDependencies": {
     "vercel": "latest"

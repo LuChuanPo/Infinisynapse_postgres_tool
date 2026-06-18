@@ -2,10 +2,11 @@ import http from "node:http";
 import { readFile } from "node:fs/promises";
 import { extname, join, resolve } from "node:path";
 import { randomUUID } from "node:crypto";
+import apiHandler from "./api/index.js";
 
 const host = "127.0.0.1";
 const port = Number(process.env.PORT || 4177);
-const root = resolve(import.meta.dirname);
+const root = resolve(import.meta.dirname, "public");
 const sessions = new Map();
 
 const mimeTypes = {
@@ -258,7 +259,7 @@ const server = http.createServer(async (req, res) => {
   const url = new URL(req.url || "/", `http://${req.headers.host}`);
   try {
     if (url.pathname.startsWith("/api/")) {
-      await routeApi(req, res, url);
+      await apiHandler(req, res);
       return;
     }
     await routeStatic(req, res, url);
