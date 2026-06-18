@@ -1380,6 +1380,10 @@
                 <label>密码<input id="dbPassword" name="dbPassword" type="password" autocomplete="off" /></label>
               </div>
               <div class="row-2 cols">
+                <label>Schema<input id="dbSchema" name="dbSchema" value="public" autocomplete="off" /></label>
+                <label>SSL mode<input id="dbSslMode" name="dbSslMode" value="require" autocomplete="off" /></label>
+              </div>
+              <div class="row-2 cols">
                 <label>数据源名<input id="sourceName" name="sourceName" value="my_postgres" autocomplete="off" /></label>
                 <label>昵称<input id="sourceNickname" name="sourceNickname" value="业务数据库" autocomplete="off" /></label>
               </div>
@@ -1583,6 +1587,8 @@
           dbDatabase: value("dbDatabase"),
           dbUsername: value("dbUsername"),
           dbPassword: value("dbPassword"),
+          dbSchema: value("dbSchema") || "public",
+          dbSslMode: value("dbSslMode") || "require",
           name: value("sourceName"),
           nickname: value("sourceNickname"),
           question: value("question"),

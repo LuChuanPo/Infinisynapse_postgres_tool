@@ -89,12 +89,26 @@ async function proxyJson(session, method, path, body) {
 }
 
 function databaseConfig(body) {
+  const port = Number(body.dbPort || 5432);
+  const schema = body.dbSchema || "public";
+  const sslMode = body.dbSslMode || "require";
+
   return JSON.stringify({
+    host: body.dbHost,
+    port,
+    username: body.dbUsername,
+    password: body.dbPassword,
+    database: body.dbDatabase,
+    schema,
+    sslmode: sslMode,
+    ssl_mode: sslMode,
     postgres_host: body.dbHost,
-    postgres_port: Number(body.dbPort || 5432),
+    postgres_port: port,
     postgres_username: body.dbUsername,
     postgres_password: body.dbPassword,
     postgres_database: body.dbDatabase,
+    postgres_schema: schema,
+    postgres_sslmode: sslMode,
   });
 }
 
