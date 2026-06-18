@@ -2157,7 +2157,10 @@
         const data = formValues();
         const listed = await postApi("/api/list-datasources", { name: data.name });
         const existing = (listed.data?.items || []).find((item) => item.name === data.name);
-        if (existing) return existing;
+        if (existing) {
+          const updated = await postApi("/api/update-datasource", { ...data, id: existing.id });
+          return updated.data || existing;
+        }
         const created = await postApi("/api/add-datasource", data);
         return created.data;
       }

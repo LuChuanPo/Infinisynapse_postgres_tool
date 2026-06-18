@@ -80,6 +80,13 @@ function databaseConfig(body) {
     schema,
     sslmode: sslMode,
     ssl_mode: sslMode,
+    pg_host: body.dbHost,
+    pg_port: port,
+    pg_username: body.dbUsername,
+    pg_password: body.dbPassword,
+    pg_database: body.dbDatabase,
+    pg_schema: schema,
+    pg_sslmode: sslMode,
     postgres_host: body.dbHost,
     postgres_port: port,
     postgres_username: body.dbUsername,
@@ -173,6 +180,20 @@ async function handle(req, res) {
       config: databaseConfig(body),
       enabled: 1,
       description: body.description || "Created via InfiniSynapse PostgreSQL tool",
+      nickname: body.nickname || body.name,
+    });
+    sendJson(res, result.status, result.payload);
+    return;
+  }
+
+  if (route === "/update-datasource") {
+    const result = await proxyJson(auth, "POST", "/api/ai_database/update", {
+      id: body.id,
+      name: body.name,
+      type: "postgres",
+      config: databaseConfig(body),
+      enabled: 1,
+      description: body.description || "Updated via InfiniSynapse PostgreSQL tool",
       nickname: body.nickname || body.name,
     });
     sendJson(res, result.status, result.payload);
